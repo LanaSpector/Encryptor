@@ -3,6 +3,10 @@ public class CaesarCipher {
             "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" + "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
             ".,\":!? +-*/\\@#$%^&(){}[];'|`~=_©«»—" + "0123456789";
 
+    public int alphabetLength(){
+        return ALPHABET.length();
+    }
+
     public String encrypt(String message, int key) {
         StringBuilder builder = new StringBuilder();
         for (char aChar : message.toCharArray()) {

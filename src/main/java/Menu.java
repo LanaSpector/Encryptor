@@ -11,8 +11,8 @@ public class Menu {
                     "5. Выйти из программы\n ");
             Scanner scanner = new Scanner(System.in);
             switch (scanner.nextLine()) {
-                case "1" -> System.out.println("зашифровать");
-                case "2" -> System.out.println("расшифровать");
+                case "1" -> new Encrypted().encrypted();
+                case "2" -> new Decrypted().decrypted();
                 case "3" -> System.out.println("подобрать ключ");
                 case "4" -> System.out.println("cинтаксический анализ");
                 case "5" -> {
