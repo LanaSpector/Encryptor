@@ -11,10 +11,10 @@ public class Menu {
                     "5. Выйти из программы\n ");
             Scanner scanner = new Scanner(System.in);
             switch (scanner.nextLine()) {
-                case "1" -> new Encrypted().encrypted();
-                case "2" -> new Decrypted().decrypted();
-                case "3" -> System.out.println("подобрать ключ");
-                case "4" -> System.out.println("cинтаксический анализ");
+                case "1" -> new EncryptedDecrypted().encryptedDecrypted(true);
+                case "2" -> new EncryptedDecrypted().encryptedDecrypted(false);
+                case "3" -> new Bruteforce().bruteforce();
+                case "4" -> new Parsing().parsing();
                 case "5" -> {
                     return;
                 }
