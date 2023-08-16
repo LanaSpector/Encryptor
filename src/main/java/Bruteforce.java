@@ -4,30 +4,35 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bruteforce {
     private final CaesarCipher caesar = new CaesarCipher();
-    Scanner scanner = new Scanner(System.in);
 
     @SneakyThrows
     public void bruteforce() {
-        System.out.println("Введите путь к файлу для расшифровки");
-        String path = scanner.nextLine();
-        System.out.println("Введите путь для записи расшифровки");
-        String path2 = scanner.nextLine();
+        Util.writeMessage("Введите путь к файлу для расшифровки");
+        String path = Util.readString();
+        Path bruteforce = Util.buildFileName(path, "_bruteforce");
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = Files.newBufferedReader(Path.of(path));
-             BufferedWriter writer = Files.newBufferedWriter(Path.of(path2))) {
+             BufferedWriter writer = Files.newBufferedWriter(bruteforce)) {
+            List<String> list = new ArrayList<>();
             while (reader.ready()) {
                 String line = reader.readLine();
+                list.add(line);
                 builder.append(line);
             }
             for (int i = 0; i < caesar.alphabetLength(); i++) {
                 String decrypt = caesar.decrypt(builder.toString(), i);
                 if (isValidateText(decrypt)) {
-                    writer.write(decrypt);
-                    System.out.println("Файл расшифрован. Ключ расшифровки = " + i);
+                    for (String str : list) {
+                        writer.write(caesar.decrypt(str, i));
+                        writer.newLine();
+                    }
+                    Util.writeMessage("Файл расшифрован. Ключ расшифровки = " + i);
                     break;
                 }
             }
@@ -47,19 +52,18 @@ public class Bruteforce {
             isValidate = true;
         }
         while (isValidate) {
-            System.out.println(text);
-            System.out.println("Понятен ли этот текст? Y(yes)/N(no)");
-            String answer = scanner.nextLine();
+            Util.writeMessage(text);
+            Util.writeMessage("Понятен ли этот текст? Y(yes)/N(no)");
+            String answer = Util.readString();
             if (answer.equalsIgnoreCase("Y")) {
                 return true;
             } else if (answer.equalsIgnoreCase("N")) {
                 isValidate = false;
             } else {
-                System.out.println("Вероятно, Вы нажали не ту букву. Повторите попытку");
+                Util.writeMessage("Вероятно, введена не та буква. Повторите попытку");
             }
         }
         return false;
-
     }
 }
 
