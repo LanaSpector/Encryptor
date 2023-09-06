@@ -8,7 +8,6 @@ public class Util {
     private static final BufferedReader CONSOLE = new BufferedReader(new InputStreamReader(System.in));
 
     private Util() {
-
     }
 
     public static void writeMessage(String message) {
@@ -16,11 +15,11 @@ public class Util {
     }
 
     @SneakyThrows
-    public static String readString(){
+    public static String readString() {
         return CONSOLE.readLine();
     }
 
-    public static int readInt(){
+    public static int readInt() {
         return Integer.parseInt(readString());
     }
 
@@ -30,7 +29,7 @@ public class Util {
             int index = path.lastIndexOf(".");
             fileName = path.substring(0, index) + suffix + path.substring(index);
         } else {
-            fileName = path+suffix;
+            fileName = path + suffix;
         }
         return Path.of(fileName);
     }

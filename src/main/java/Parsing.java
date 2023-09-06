@@ -20,7 +20,7 @@ public class Parsing {
         Map<Character, Integer> mapEncrypted = new HashMap<>();
         Map<Character, Integer> mapStatistics = new HashMap<>();
         fillMapWithValues(mapEncrypted, pathEncrypted);
-        fillMapWithValues(mapStatistics, pathStatistics);
+        fillMapWithValues(mapStatistics, pathStatistics); // откуда здесь данные?
         List<Map.Entry<Character, Integer>> listEncrypted = mapToList(mapEncrypted);
         List<Map.Entry<Character, Integer>> listStatistics = mapToList(mapStatistics);
 
@@ -30,7 +30,7 @@ public class Parsing {
                 mapDecrypted.put(listEncrypted.get(i).getKey(), listStatistics.get(i).getKey());
             }
         } else {
-            Util.writeMessage("Размер файла со статистикой меньше зашифрованного. Нужен файл большего размера");
+            Util.writeMessage("Размер файла со статистикой меньше зашифрованного. Нужен файл большего размера"); // как сделать файл большего размера?
         }
         try (BufferedReader reader = Files.newBufferedReader(Path.of(pathEncrypted));
              BufferedWriter writer = Files.newBufferedWriter(newPath)) {
@@ -47,10 +47,10 @@ public class Parsing {
                 writer.newLine();
             }
         }
-        Util.writeMessage("Файл успешно расшифрован методом статического анализа");
+        Util.writeMessage("Файл успешно расшифрован методом статического анализа"); // может, "статистического"?
     }
 
-    private List<Map.Entry<Character, Integer>> mapToList(Map<Character, Integer> map) {
+    private List<Map.Entry<Character, Integer>> mapToList(Map<Character, Integer> map) { // помещаем мапу в список, чтобы отсортировать его методом sort
         List<Map.Entry<Character, Integer>> list = new ArrayList<>(map.entrySet());
         list.sort((o1, o2) -> o2.getValue() - o1.getValue());
         return list;
@@ -71,8 +71,5 @@ public class Parsing {
                 }
             }
         }
-
     }
-
-
 }

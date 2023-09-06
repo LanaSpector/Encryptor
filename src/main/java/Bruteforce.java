@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Bruteforce {
     private final CaesarCipher caesar = new CaesarCipher();
@@ -25,7 +24,7 @@ public class Bruteforce {
                 list.add(line);
                 builder.append(line);
             }
-            for (int i = 0; i < caesar.alphabetLength(); i++) {
+            for (int i = 0; i < caesar.alphabetLength(); i++) { //подбор ключа для расшифровки
                 String decrypt = caesar.decrypt(builder.toString(), i);
                 if (isValidateText(decrypt)) {
                     for (String str : list) {
@@ -39,11 +38,11 @@ public class Bruteforce {
         }
     }
 
-    private boolean isValidateText(String text) {
+    private boolean isValidateText(String text) { // проверка корректности текста
         boolean isValidate = false;
         String[] words = text.split(" ");
         for (int i = 0; i < words.length; i++) {
-            if (words[i].length() > 28) {
+            if (words[i].length() > 28) { // почему проверка на больше именно 28?
                 return false;
             }
         }
